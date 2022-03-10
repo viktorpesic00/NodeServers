@@ -13,9 +13,12 @@ app.post("/", (req, res) => {
   const { email, password } = req.body;
 
   if (!email) {
+    return res.status(200).json({ success: false, message: "email is empty" });
+  }
+  if (!password) {
     return res
-      .status(400)
-      .json({ success: false, msg: "please provide name value" });
+      .status(200)
+      .json({ success: false, message: "password is empty" });
   }
 
   try {
@@ -28,10 +31,14 @@ app.post("/", (req, res) => {
     });
 
     imap.once("error", function (err) {
-      return res.status(400).json({ success: false, msg: "data is wrong" });
+      return res
+        .status(200)
+        .json({ success: false, message: "Email or Password is not correct" });
     });
     imap.once("ready", function () {
-      return res.status(200).json({ success: true, msg: "ti si car" });
+      return res
+        .status(200)
+        .json({ success: true, message: "Logged in succesfuly" });
     });
     imap.connect();
   } catch (err) {
