@@ -1,3 +1,4 @@
+//Viktor kod
 fetchData = () => {
   const baseURL = "http://109.92.116.113:5000/";
   axios
@@ -13,9 +14,10 @@ fetchData = () => {
     .then((response) => {
       console.log(response.data);
       if (response.data.success) {
-        alert("oce");
+        alert(response.data.message);
+        this.props.navigation.navigate("Pocetna");
       } else {
-        alert("nece");
+        alert(response.data.message);
       }
     });
 };
