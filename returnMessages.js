@@ -7,7 +7,7 @@ app.use(express.static("./methods-public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.post("/", (req, res) => {
+app.post("/returnMessages", (req, res) => {
   console.log(req.body);
   const { email, password } = req.body;
 
@@ -89,6 +89,6 @@ app.post("/", (req, res) => {
   });
 });
 
-app.listen(4000, () => {
-  console.log("listening: 4000");
+app.listen(80, () => {
+  console.log("listening: 80");
 });
