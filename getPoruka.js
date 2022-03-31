@@ -6,9 +6,9 @@ app.use(express.static("./methods-public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get("/getDogadjaji", (req, res) => {
+app.get("/getPoruka", (req, res) => {
   console.log("req");
-  let rawdata = fs.readFileSync("dogadjaji.json");
+  let rawdata = fs.readFileSync("poruka.json");
   let parsedData = JSON.parse(rawdata);
   console.log(parsedData);
   let data = {
@@ -18,6 +18,6 @@ app.get("/getDogadjaji", (req, res) => {
   return res.status(200).json(data);
 });
 
-app.listen(5001, () => {
-  console.log("listening: 5001");
+app.listen(5003, () => {
+  console.log("listening: 5003");
 });

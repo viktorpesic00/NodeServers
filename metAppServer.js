@@ -2,13 +2,26 @@ const express = require("express");
 var imaps = require("imap-simple");
 //var htmlToText = require("html-to-text");
 const app = express();
+const fs = require("fs");
 
 app.use(express.static("./methods-public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.get("/getPoruka", (req, res) => {
+  //  console.log("req");
+  let rawdata = fs.readFileSync("poruka.json");
+  let parsedData = JSON.parse(rawdata);
+  // console.log(parsedData);
+  let data = {
+    status: true,
+    parsedData,
+  };
+  return res.status(200).json(data);
+});
+
 app.post("/returnMessages", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { email, password } = req.body;
 
   if (!email) {
@@ -81,7 +94,7 @@ app.post("/returnMessages", (req, res) => {
             messagesList.push(message);
           }
           messagesList.reverse();
-          console.log(messagesList.slice(0, 3));
+          //   console.log(messagesList.slice(0, 3));
 
           return res.status(200).json(messagesList.slice(0, 3));
         });
@@ -89,6 +102,42 @@ app.post("/returnMessages", (req, res) => {
   });
 });
 
-app.listen(5000, () => {
-  console.log("listening: 5000");
+app.get("/getObavestenja", (req, res) => {
+  // console.log("req");
+  let rawdata = fs.readFileSync("obavestenja.json");
+  let parsedData = JSON.parse(rawdata);
+  // console.log(parsedData);
+  let data = {
+    status: true,
+    parsedData,
+  };
+  return res.status(200).json(data);
+});
+
+app.get("/getDogadjaji", (req, res) => {
+  // console.log("req");
+  let rawdata = fs.readFileSync("dogadjaji.json");
+  let parsedData = JSON.parse(rawdata);
+  // console.log(parsedData);
+  let data = {
+    status: true,
+    parsedData,
+  };
+  return res.status(200).json(data);
+});
+
+app.get("/getIgSlike", (req, res) => {
+  //  console.log("req");
+  let rawdata = fs.readFileSync("igSlike.json");
+  let parsedData = JSON.parse(rawdata);
+  // console.log(parsedData);
+  let data = {
+    status: true,
+    parsedData,
+  };
+  return res.status(200).json(data);
+});
+
+app.listen(80, () => {
+  console.log("listening: 80");
 });
