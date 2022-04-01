@@ -4,6 +4,9 @@ var imaps = require("imap-simple");
 const app = express();
 const fs = require("fs");
 
+var Imap = require("imap"),
+  inspect = require("util").inspect;
+
 app.use(express.static("./methods-public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
