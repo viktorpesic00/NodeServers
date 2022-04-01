@@ -1,13 +1,13 @@
 const fs = require("fs");
 
 const puppeteer = require("puppeteer");
-const URL = "https://marketing.metropolitan.ac.rs/notifikacije/";
 
 setInterval(function () {
   run();
 }, 6000);
 
-function run() {
+function getObavestenja() {
+  const URL = "https://marketing.metropolitan.ac.rs/notifikacije/";
   (async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();

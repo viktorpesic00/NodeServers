@@ -1,13 +1,13 @@
 const fs = require("fs");
 
 const puppeteer = require("puppeteer");
-const URL = "https://www.picuki.com/profile/univerzitet_metropolitan";
 
 setInterval(function () {
   run();
 }, 6000);
 
-function run() {
+function getInstagramSlike() {
+  const URL = "https://www.picuki.com/profile/univerzitet_metropolitan";
   (async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();

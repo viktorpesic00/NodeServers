@@ -1,14 +1,17 @@
 const fs = require("fs");
 
 const puppeteer = require("puppeteer");
-const URL = "https://www.metropolitan.ac.rs/dogadjaji-app/";
 
-setInterval(function () {
-  run();
-}, 6000);
+// setInterval(function () {
+//   run();
+// }, 0001);
 
-function run() {
+run();
+
+function getDogadjaji() {
+  const URL = "https://www.metropolitan.ac.rs/dogadjaji-app/";
   (async () => {
+    //// console.log(Date.now.getSeconds);
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
@@ -55,6 +58,7 @@ function run() {
     });
 
     console.log(data);
+    // console.log(Date.now.getSeconds);
 
     await browser.close();
   })();

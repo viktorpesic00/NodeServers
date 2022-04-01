@@ -1,13 +1,13 @@
 const fs = require("fs");
 
 const puppeteer = require("puppeteer");
-const URL = "https://marketing.metropolitan.ac.rs/poruke/";
 
 setInterval(function () {
   run();
 }, 6000);
 
-function run() {
+function getPoruka() {
+  const URL = "https://marketing.metropolitan.ac.rs/poruke/";
   (async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();

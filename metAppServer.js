@@ -1,6 +1,6 @@
 const express = require("express");
 var imaps = require("imap-simple");
-//var htmlToText = require("html-to-text");
+const puppeteer = require("puppeteer");
 const app = express();
 const fs = require("fs");
 
@@ -182,3 +182,181 @@ app.get("/getIgSlike", (req, res) => {
 app.listen(80, () => {
   console.log("listening: 80");
 });
+
+setInterval(function () {
+  getObavestenja();
+}, 5000);
+setInterval(function () {
+}, 7000);
+setInterval(function () {
+  getInstagramSlike();
+}, 17000);
+setInterval(function () {
+  getPoruka();
+}, 4000);
+
+function getObavestenja() {
+  const URL = "https://marketing.metropolitan.ac.rs/notifikacije/";
+  (async () => {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    await page.goto(URL, { waitUntil: "networkidle0" });
+
+    let data = await page.evaluate(() => {
+      let naslovList = [];
+      let tekstList = [];
+
+      let naslovi = document.getElementsByClassName("naslov-t");
+      let objave = document.getElementsByClassName("tekst-t");
+
+      for (let naslov of naslovi) {
+        naslovList.push(naslov.textContent);
+      }
+
+      for (let tekst of objave) {
+        tekstList.push(tekst.textContent);
+      }
+
+      return {
+        naslovList,
+        tekstList,
+      };
+    });
+
+    fs.writeFile("obavestenja.json", JSON.stringify(data), function (err) {
+      if (err) console.log("Ucitavanje obavestenja:  err" + err);
+      console.log("Ucitavanje obavestenja: complete");
+    });
+
+    //console.log(data);
+
+    await browser.close();
+  })();
+}
+
+function getDogadjaji() {
+  const URL = "https://www.metropolitan.ac.rs/dogadjaji-app/";
+  (async () => {
+    //// console.log(Date.now.getSeconds);
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    await page.goto(URL, { waitUntil: "networkidle0" });
+
+    let data = await page.evaluate(() => {
+      let naslovList = [];
+      let datumList = [];
+      let fotkeList = [];
+      let objaveList = [];
+
+      let naslovi = document.getElementsByClassName("naslov-t");
+      let datumi = document.getElementsByClassName("datum-odrzavanja");
+      let fotke = document.getElementsByClassName("fotka-url");
+      let objave = document.getElementsByClassName("objava-url");
+
+      for (let naslov of naslovi) {
+        naslovList.push(naslov.textContent);
+      }
+
+      for (let datum of datumi) {
+        datumList.push(datum.textContent);
+      }
+
+      for (let fotka of fotke) {
+        fotkeList.push(fotka.textContent);
+      }
+
+      for (let objava of objave) {
+        objaveList.push(objava.textContent);
+      }
+
+      return {
+        naslovList,
+        datumList,
+        fotkeList,
+        objaveList,
+      };
+    });
+
+    fs.writeFile("dogadjaji.json", JSON.stringify(data), function (err) {
+      if (err) console.log("Ucitavanje dogadjaja: err" + err);
+      console.log("Ucitavanje dogadjaja: complete");
+    });
+
+    //console.log(data);
+    // console.log(Date.now.getSeconds);
+
+    await browser.close();
+  })();
+}
+function getInstagramSlike() {
+  const URL = "https://www.picuki.com/profile/univerzitet_metropolitan";
+  (async () => {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    await page.goto(URL, { waitUntil: "networkidle0" });
+
+    let data = await page.evaluate(() => {
+      let slikeList = [];
+
+      slike = document.getElementsByClassName("post-image");
+
+      let slika1 = slike[0].src;
+      let slika2 = slike[1].src;
+      let slika3 = slike[2].src;
+      let slika4 = slike[3].src;
+
+      slikeList.push(slika1);
+      slikeList.push(slika2);
+      slikeList.push(slika3);
+      slikeList.push(slika4);
+
+      return {
+        slikeList,
+      };
+    });
+
+    fs.writeFile("igSlike.json", JSON.stringify(data), function (err) {
+      if (err) console.log("Ucitavanje Ig slika:  err " + err);
+      console.log("Ucitavanje Ig slika: complete");
+    });
+
+    //console.log(data);
+
+    await browser.close();
+  })();
+}
+function getPoruka() {
+  const URL = "https://marketing.metropolitan.ac.rs/poruke/";
+  (async () => {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    await page.goto(URL, { waitUntil: "networkidle0" });
+
+    let data = await page.evaluate(() => {
+      let naslovList = [];
+
+      let naslovi = document.getElementsByClassName("naslov-t");
+
+      for (let naslov of naslovi) {
+        naslovList.push(naslov.textContent);
+      }
+
+      return {
+        naslovList,
+      };
+    });
+
+    fs.writeFile("poruka.json", JSON.stringify(data), function (err) {
+      if (err) console.log("Ucitavanje poruka: err" + err);
+      console.log("Ucitavanje poruka: complete");
+    });
+
+    //console.log(data);
+
+    await browser.close();
+  })();
+}
