@@ -199,7 +199,7 @@ function getObavestenja() {
   (async () => {
     const browser = await puppeteer.launch({
       headless: true,
-      args: ["--use-gl=egl"],
+      args: ["--no-sandbox"],
     });
     const page = await browser.newPage();
 
@@ -243,7 +243,7 @@ function getDogadjaji() {
     //// console.log(Date.now.getSeconds);
     const browser = await puppeteer.launch({
       headless: true,
-      args: ["--use-gl=egl"],
+      args: ["--no-sandbox"],
     });
     const page = await browser.newPage();
 
@@ -300,7 +300,7 @@ function getInstagramSlike() {
   (async () => {
     const browser = await puppeteer.launch({
       headless: true,
-      args: ["--use-gl=egl"],
+      args: ["--no-sandbox"],
     });
     const page = await browser.newPage();
 
@@ -341,7 +341,7 @@ function getPoruka() {
   (async () => {
     const browser = await puppeteer.launch({
       headless: true,
-      args: ["--use-gl=egl"],
+      args: ["--no-sandbox"],
     });
     const page = await browser.newPage();
 
