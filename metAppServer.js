@@ -183,17 +183,17 @@ app.listen(80, () => {
   console.log("listening: 80");
 });
 
-setInterval(function () {
-  getObavestenja();
-}, 5000);
-setInterval(function () {
-}, 7000);
-setInterval(function () {
-  getInstagramSlike();
-}, 17000);
-setInterval(function () {
-  getPoruka();
-}, 4000);
+// setInterval(function () {
+//   getObavestenja();
+// }, 5000);
+// setInterval(function () {
+// }, 7000);
+// setInterval(function () {
+//   getInstagramSlike();
+// }, 17000);
+// setInterval(function () {
+//   getPoruka();
+// }, 4000);
 
 function getObavestenja() {
   const URL = "https://marketing.metropolitan.ac.rs/notifikacije/";
