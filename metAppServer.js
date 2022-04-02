@@ -197,7 +197,10 @@ setInterval(function () {
 function getObavestenja() {
   const URL = "https://marketing.metropolitan.ac.rs/notifikacije/";
   (async () => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--use-gl=egl"],
+    });
     const page = await browser.newPage();
 
     await page.goto(URL, { waitUntil: "networkidle0" });
@@ -238,7 +241,10 @@ function getDogadjaji() {
   const URL = "https://www.metropolitan.ac.rs/dogadjaji-app/";
   (async () => {
     //// console.log(Date.now.getSeconds);
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--use-gl=egl"],
+    });
     const page = await browser.newPage();
 
     await page.goto(URL, { waitUntil: "networkidle0" });
@@ -292,7 +298,10 @@ function getDogadjaji() {
 function getInstagramSlike() {
   const URL = "https://www.picuki.com/profile/univerzitet_metropolitan";
   (async () => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--use-gl=egl"],
+    });
     const page = await browser.newPage();
 
     await page.goto(URL, { waitUntil: "networkidle0" });
@@ -330,7 +339,10 @@ function getInstagramSlike() {
 function getPoruka() {
   const URL = "https://marketing.metropolitan.ac.rs/poruke/";
   (async () => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--use-gl=egl"],
+    });
     const page = await browser.newPage();
 
     await page.goto(URL, { waitUntil: "networkidle0" });
