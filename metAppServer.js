@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.post("/auth", (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   const { email, password } = req.body;
 
   if (!email) {
