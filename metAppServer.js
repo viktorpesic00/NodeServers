@@ -137,7 +137,7 @@ app.post("/returnMessages", (req, res) => {
           messagesList.reverse();
           //   console.log(messagesList.slice(0, 3));
 
-          return res.status(200).json(messagesList.slice(0, 3));
+          return res.status(200).json(messagesList);
         });
     });
   });
