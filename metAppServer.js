@@ -167,6 +167,13 @@ app.get("/getDogadjaji", (req, res) => {
   return res.status(200).json(data);
 });
 
+app.get("/getFirebaseApiKey", (req, res) => {
+  let key =
+    "AAAAhrxd-oI:APA91bHWahm0JbI3U5oE-teVGrvLSWx9HpVaMg6n1BhVOXKBhYlSTVCGtD0JC0NowH5ZaV710aibFT5p3PNJabNRC5Lx9VL8HER9mkebxDEwCd7m-VFyRxpblfZL3pftWiKD_UV6PmDs";
+
+  return res.status(200).send(key);
+});
+
 app.get("/getIgSlike", (req, res) => {
   //  console.log("req");
   let rawdata = fs.readFileSync("igSlike.json");
